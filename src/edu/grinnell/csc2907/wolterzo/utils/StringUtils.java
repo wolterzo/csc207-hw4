@@ -45,55 +45,59 @@ public class StringUtils
   {
     String[] tempAr = new String[str.length()];
     int aIndex = 0;
+    String currString = new String();
+    char ch;
+    boolean inQuote = false;
 
     for (int i = 0; i < str.length(); i++)
       {
-        System.out.println("at char: " + str.charAt(i));
-        if (str.charAt(i) == ',' && str.charAt(i + 1) == '\"')
+        ch = str.charAt(i);
+        if (inQuote)
           {
-            int j;
-            for (j = i; j < str.length(); j++)
+            System.out.println("In quote");
+            if (ch == '\"' && (i + 1) < str.length()
+                && str.charAt(i + 1) == '\"')
               {
-                if (str.charAt(j) == '\"'
-                    && (str.charAt(j + 1) == ',' || str.length() == j + 1))
-                  {
-                    tempAr[aIndex] = str.substring(i + 2, j);
-                    System.out.println(tempAr[aIndex]);
-                    aIndex++;
-                    break;
-                  } // if 
-              } // for
-            i = j;
-          } // if 
-        else if (str.charAt(i) == ',')
-          {
-            // last element
-            if (str.indexOf(',', i + 1) == -1)
+                System.out.println("skipped a quote");
+                i++; //skip next quotation mark
+                currString = currString + ch;
+              }
+            else if (ch == '\"' && (i + 1) < str.length()
+                     && str.charAt(i + 1) == ',')
               {
-                tempAr[aIndex] = str.substring(i + 1);
-                System.out.println(tempAr[aIndex]);
+                inQuote = false;
+                tempAr[aIndex] = currString;
+                System.out.println("add quoted string: " + currString);
                 aIndex++;
-              } // else if
+                currString = new String();
+                i++;
+              }
             else
               {
-                tempAr[aIndex] = str.substring(i + 1, str.indexOf(',', i + 1));
-                System.out.println(tempAr[aIndex]);
-                i = str.indexOf(',', i + 1) - 1;
-                aIndex++;
+                currString = currString + ch;
+                System.out.println(currString);
               }
-          } // else if
+          } // if inQuote
+        else if (ch == ',')
+          {
+            tempAr[aIndex] = currString;
+            System.out.println("add string: " + currString);
+            aIndex++;
+            currString = new String();
+          }// if comma
+        else if (ch == '\"')
+          {
+            inQuote = true;
+            System.out.println("inquote");
+          } // else if quotation
         else
           {
-            // if the first element in the array
-            if (aIndex == 0)
-              {
-                tempAr[aIndex] = str.substring(0, str.indexOf(','));
-                System.out.println(tempAr[aIndex]);
-                i = str.indexOf(',', 0) - 1;
-                aIndex++;
-              } // if
-          } // else
+            currString = currString + ch;
+            System.out.println(currString);
+          }
       } // for
+    tempAr[aIndex++] = currString;
+    System.out.println("add end string: " + currString);
     String[] array = new String[aIndex];
     for (int i = 0; i < array.length; i++)
       {
