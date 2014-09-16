@@ -64,28 +64,10 @@ public class Fraction
 
   /**
   * Build a new fraction with numerator num and denominator denom.
-  *
-  * Warning! Not yet stable.
   */
   public Fraction(int num, int denom)
   {         
-    this.num = BigInteger.valueOf(num);
-    this.denom = BigInteger.valueOf(denom);
-    
-    BigInteger gcd=this.num.gcd(this.denom);
-    
-    this.num = this.num.divide(gcd);
-    this.denom = this.denom.divide(gcd);
-    
-    if(this.num.equals(0))
-      {
-        this.denom = BigInteger.valueOf(1);
-      }// if
-    else if(this.denom.compareTo(BigInteger.valueOf(0)) == -1)
-      {
-        this.num = this.num.negate();
-        this.denom = this.denom.negate();
-      } // else if
+    this(BigInteger.valueOf(num), BigInteger.valueOf(denom));
   } // Fraction(int, int)
 
   /**
