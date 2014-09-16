@@ -70,9 +70,11 @@ public class Calculator
         case '/':
           result = first.divide(second);
           break;
+          /* Don't need exponentiation
         case '^':
           result = first.pow(Integer.valueOf(second.num.toString()));
           break;
+          */
       } // switch
     return result;
 
