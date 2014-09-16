@@ -37,9 +37,6 @@ public class StringUtils
    * grouped by quotation marks
    * @param str
    * @return
-   * 
-   * NOT WORKING
-   * - adding what's after the separator or before, stick to one method. 
    */
   public static String[] splitCSV(String str)
   {
@@ -54,11 +51,9 @@ public class StringUtils
         ch = str.charAt(i);
         if (inQuote)
           {
-            System.out.println("In quote");
             if (ch == '\"' && (i + 1) < str.length()
                 && str.charAt(i + 1) == '\"')
               {
-                System.out.println("skipped a quote");
                 i++; //skip next quotation mark
                 currString = currString + ch;
               }
@@ -67,7 +62,6 @@ public class StringUtils
               {
                 inQuote = false;
                 tempAr[aIndex] = currString;
-                System.out.println("add quoted string: " + currString);
                 aIndex++;
                 currString = new String();
                 i++;
@@ -75,29 +69,24 @@ public class StringUtils
             else
               {
                 currString = currString + ch;
-                System.out.println(currString);
               }
           } // if inQuote
         else if (ch == ',')
           {
             tempAr[aIndex] = currString;
-            System.out.println("add string: " + currString);
             aIndex++;
             currString = new String();
           }// if comma
         else if (ch == '\"')
           {
             inQuote = true;
-            System.out.println("inquote");
           } // else if quotation
         else
           {
             currString = currString + ch;
-            System.out.println(currString);
           }
       } // for
     tempAr[aIndex++] = currString;
-    System.out.println("add end string: " + currString);
     String[] array = new String[aIndex];
     for (int i = 0; i < array.length; i++)
       {
