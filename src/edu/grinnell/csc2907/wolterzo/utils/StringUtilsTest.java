@@ -36,6 +36,10 @@ public class StringUtilsTest
                       StringUtils.splitCSV("\"a,b\",c"));
     assertArrayEquals(new String[] { "a", "b,b\"", "c" },
                       StringUtils.splitCSV("a,\"b,b\"\"\",c"));
+    assertArrayEquals(new String[] { "a" },
+                      StringUtils.splitCSV("\"a\""));
+    assertArrayEquals(new String[] { "a" },
+                      StringUtils.splitCSV("a"));
   }
 
 }
