@@ -49,7 +49,7 @@ public class Fraction
     if(num.equals(0))
       {
         this.denom = BigInteger.valueOf(1);
-      }// if
+      } // if
     else if(denom.compareTo(BigInteger.valueOf(0)) == -1)
       {
         this.num = num.negate();
@@ -59,7 +59,7 @@ public class Fraction
       {
         this.num = num;
         this.denom = denom;
-      }// else   
+      } // else   
   } // Fraction(BigInteger, BigInteger)
 
   /**
@@ -192,7 +192,7 @@ public class Fraction
         Fraction newFrac = new Fraction("1");
         newFrac = newFrac.divide(this.pow(expt*-1));
         return newFrac;
-      }
+      } // if
     return new Fraction(this.num.pow(expt), this.denom.pow(expt));
   } // pow(int)
     
